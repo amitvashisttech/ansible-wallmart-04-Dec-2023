@@ -36,6 +36,18 @@ git clone https://github.com/amitvashisttech/ansible-wallmart-04-Dec-2023.git
 ```
 
 
+### Step8 : Install ANSIBLE on Debain / Ubuntu Nodes 
+```
+apt-get update
+apt-get install ansible -y
+```
+
+### Step9 : Check the Ansible Version 
+```
+ansible --version
+```
+
+
  
 ## Extra Vagrant Command  :
 ### Bring up a specific virtalbox instances 
