@@ -32,7 +32,7 @@ sudo su -
 
 ### Step7 : Clone our Ansible Repo. 
 ```
-
+git clone https://github.com/amitvashisttech/ansible-wallmart-04-Dec-2023.git
 ```
 
 
