@@ -78,3 +78,27 @@ ansible dc -i hosts -m ping -u vagrant -k
 ansible dc -i hosts -m ping
 ````
 
+
+
+
+### Let's excute the operation on the common host btw the group [web] & [prod]:
+```
+ansible 'web:&prod' -i hosts -m ping -u vagrant -k
+```
+```
+ansible 'db:&prod' -i hosts -m ping -u vagrant -k
+```
+```
+ansible 'db:&uat' -i hosts -m ping -u vagrant -k
+```
+
+### Let's excute the operation on all host in the group [uat] & [prod]:
+```
+ansible 'prod:uat' -i hosts -m ping -u vagrant -k
+```
+
+
+### Let's excute the operation on all host in the group [uat] & [prod] & exclude the hosts belongs to ansible group:
+```
+ansible 'prod:uat:!ansible' -i hosts -m ping -u vagrant -k
+```
