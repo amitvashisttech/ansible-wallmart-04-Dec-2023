@@ -1,5 +1,5 @@
  ```
-  660  cd 22-Introduction-to-Vault/
+  660  cd 04-Introduction-to-Vault/
   661  ls
   662  echo "Hello World.ls" > encrypt_me.txt
   663  echo "Hello World" > encrypt_me.txt
