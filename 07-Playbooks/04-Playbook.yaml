@@ -1,0 +1,30 @@
+---
+
+# This is going to be my 2nd playbook 
+#
+
+- hosts: web
+  name: "WebServer Deployment Play"
+  tasks:
+  - name: Install Apache Packages
+    apt: name=apache2 state=present
+
+  - name: Start Apache2 Service 
+    service: name=apache2 state=started 
+
+
+
+- hosts: all
+  name: "Disable Firewall Play"
+  tasks:
+  - name: Disable Firewall Service
+    service: name=ufw state=stopped
+
+
+
+- hosts: 'web:&prod:!ansible'
+  name: "Install Tree Pkg Deployment Play"
+  tasks:
+  - name: Install Tree Package
+    apt: name=tree state=present
+

@@ -1,0 +1,14 @@
+   44  cd 05-Modules/
+   45  ls
+   46  ansible-doc -l
+   47  ansible-doc apt
+   48  ls
+   49  ansible 172.31.0.100 -i hosts -m apt -a "name=tree state=present" -u vagrant -k -b
+   50  vim hosts
+   51  ls
+   52  ansible 172.31.0.100 -i hosts -m apt -a "name=tree state=present"  -b
+   53  ansible 172.31.0.100 -i hosts -m apt -a "name=tree state=present" -u vagrant -k  -b
+   54  ansible 172.31.0.101 -i hosts -m apt -a "name=tree state=present" -u vagrant -k  -b
+   55  ping -c2 172.31.0.101
+   56  ansible 172.31.0.101 -i hosts -m apt -a "name=tree state=present" -u vagrant -k  -b
+

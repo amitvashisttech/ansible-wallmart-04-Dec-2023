@@ -1,0 +1,39 @@
+ 64  cd 06-Ansible-Config/
+   65  ls
+   66  rm -rf History.txt
+   67  ansible 172.31.0.101 -i hosts -m apt -a "name=tree state=present" -u vagrant -k  -b
+   68  vim ansible.cfg
+   69  ansible 172.31.0.101 -m apt -a "name=tree state=present" -u vagrant -k  -b
+   70  vim hosts
+   71  ls
+   72  ansible 172.31.0.101 -m apt -a "name=tree state=present"
+   73  ls
+   74  cat /etc/ansible/ansible.cfg
+   75  ls
+   76  vim ansible.cfg
+   77  ansible 172.31.0.101 -m apt -a "name=tree state=present"
+   78  ansible 172.31.0.102 -m apt -a "name=tree state=present"
+   79  vim ansible.cfg
+   80  ansible 172.31.0.102 -m apt -a "name=tree state=present"
+   81  ls
+   82  vim ansible.cfg
+   83  ansible 172.31.0.102 -m apt -a "name=tree state=present"
+   84  cat  /var/log/ansible.logs
+   85  ls
+   86  cat ~/.ssh/known_hosts
+   87  > ~/.ssh/known_hosts
+   88  cat ~/.ssh/known_hosts
+   89  ping -c2 worker2
+   90  ls
+   91  cd ansible-wallmart-04-Dec-2023/
+   92  ls
+   93  cd 06-Ansible-Config/
+   94  ls
+   95  ansible all -m ping
+   96  vim ansible.cfg
+   97  cat ~/.ssh/known_hosts
+   98  ansible all -m ping
+   99  cat ~/.ssh/known_hosts
+  100  vim ansible.cfg
+  101  ansible all -m ping
+

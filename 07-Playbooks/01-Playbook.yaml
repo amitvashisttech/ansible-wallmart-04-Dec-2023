@@ -1,0 +1,10 @@
+---
+
+# This is going to be my first playbook 
+#
+# And Following is my first play
+
+- hosts: 172.31.0.101
+  tasks:
+  - name: Install Tree Package
+    apt: name=tree state=present 
