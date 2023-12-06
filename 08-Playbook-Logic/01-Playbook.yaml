@@ -1,0 +1,30 @@
+---
+
+- hosts: web
+  name: "WebServer Deployment"
+  tasks:
+  - name: Install Apache Package
+    apt: name=apache2 state=present 
+    when: ansible_os_family == "Debian"
+
+  - name: Install HTTPD Package
+    yum: name=httpd state=present 
+    when: ansible_os_family == "RedHat"
+ 
+  - name: Start Apache Service 
+    service: name=apache2 state=started
+    when: ansible_os_family == "Debian"
+
+  - name: Start HTTPD Service 
+    service: name=httpd state=started
+    when: ansible_os_family == "RedHat"
+
+
+  - name: Deploy Custom Index Web Page
+    copy: src=files/index.html dest=/var/www/html/index.html
+
+  - name: Check - Who Am I 
+    command: whoami
+    register: userinfo
+
+  - debug: var=userinfo 

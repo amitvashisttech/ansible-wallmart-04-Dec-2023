@@ -1,0 +1,55 @@
+---
+
+- hosts: web
+  name: "WebServer Deployment"
+  tasks:
+  - name: Install Apache Package
+    apt: name=apache2 state=present 
+    when: ansible_os_family == "Debian"
+
+  - name: Install HTTPD Package
+    yum: name=httpd state=present 
+    when: ansible_os_family == "RedHat"
+ 
+  - name: Start Apache Service 
+    service: name=apache2 state=started
+    when: ansible_os_family == "Debian"
+
+  - name: Start HTTPD Service 
+    service: name=httpd state=started
+    when: ansible_os_family == "RedHat"
+
+
+  - name: Deploy Custom Index Web Page
+    copy: src=files/index.html dest=/var/www/html/index.html
+
+  - name: Check - Who Am I 
+    command: whoami
+    register: userinfo
+
+  - debug: var=userinfo 
+
+
+
+  - name: Check the web info file exist or not ?
+    command: ls /var/www/html/info.html
+    register: inforesult
+    ignore_errors: yes 
+
+  - debug: var=inforesult 
+
+
+  - debug: msg="Unable to locate the info.html file"
+    when: inforesult is failed 
+    ignore_errors: yes 
+    
+
+  - debug: msg="Able to locate the info.html file"
+    when: inforesult is succeeded  
+    ignore_errors: yes 
+
+
+
+  - name: Deploy Custom Info Web Page
+    copy: src=files/info.html dest=/var/www/html/info.html
+    when: inforesult is failed 
