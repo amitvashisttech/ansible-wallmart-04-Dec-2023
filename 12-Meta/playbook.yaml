@@ -1,0 +1,85 @@
+---
+
+- hosts: web
+  name: "WebServer Deployment"
+  vars:
+    doc_root: "/var/www/html"
+    username: "Amit Vashist"
+    http_port: 8084
+  tasks:
+  - name: Install Apache Package
+    apt: name=apache2 state=present 
+    when: ansible_os_family == "Debian"
+
+  - name: Install HTTPD Package
+    yum: name=httpd state=present 
+    when: ansible_os_family == "RedHat"
+ 
+  - name: Start Apache Service 
+    service: name=apache2 state=started
+    when: ansible_os_family == "Debian"
+
+  - name: Start HTTPD Service 
+    service: name=httpd state=started
+    when: ansible_os_family == "RedHat"
+
+  - name: Install Apache Package
+    apt: name=net-tools state=present 
+    when: ansible_os_family == "Debian"
+
+
+  - name: Deploy Custom Apache Port Conf 
+    template: src=templates/ports.conf.j2 dest=/etc/apache2/ports.conf
+    notify: 
+      - Restart Apache
+      - amit 
+
+  - name: Force to Run Handlers Here
+    meta: flush_handlers
+
+  - name: Check whether my apache is listing to right port or not ?
+    shell: 'netstat -tulnp | grep -i {{http_port}}'
+
+  - name: Deploy Custom Index Web Page
+    copy: src=files/index.html dest={{doc_root}}/index.html
+
+  - name: Check - Who Am I 
+    command: whoami
+    register: userinfo
+
+  - debug: var=userinfo 
+
+
+
+  - name: Check the web info file exist or not ?
+    command: ls {{doc_root}}/info.html
+    register: inforesult
+    ignore_errors: yes 
+
+  - debug: var=inforesult 
+
+
+  - debug: msg="Unable to locate the info.html file"
+    when: inforesult is failed 
+    ignore_errors: yes 
+    
+
+  - debug: msg="Able to locate the info.html file"
+    when: inforesult is succeeded  
+    ignore_errors: yes 
+
+
+
+  - name: Deploy Custom Info Web Page
+    template: src=templates/info.j2 dest={{doc_root}}/info.html
+    notify: 
+      - Restart Apache
+
+
+
+  handlers:
+  - name: Restart Apache 
+    service: name=apache2 state=restarted
+    when: ansible_os_family == "Debian"
+  - name: amit
+    shell: 'echo "Hello Handlers - {{ansible_hostname}} - {{http_port}}" >> /tmp/handlers.txt'
