@@ -1,0 +1,20 @@
+---
+
+- hosts: web
+  tasks:
+  - name: Local Action
+    local_action: shell echo "Welcome to the Ansible Deployment and Target hosts are:" {{inventory_hostname}}  >> /root/local_ansible_action.txt 
+
+
+  - name: Remote Actions
+    shell: echo "Following Change has been completed CH-XXXXYYY123; Status - Success on host:" {{inventory_hostname}} >> /tmp/mail.txt 
+    delegate_to: 172.31.0.102
+
+
+
+  - name: Sample Message
+    shell: echo "Welcome to the Ansible Deployment and Target hosts are:" {{inventory_hostname}}  >> /tmp/local_ansible_action.txt 
+
+
+  - name: Sample Change
+    shell: echo "Following Change has been completed CH-XXXXYYY123; Status - Success on host:" {{inventory_hostname}} >> /tmp/mail-1.txt 
