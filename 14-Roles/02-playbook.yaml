@@ -1,0 +1,7 @@
+---
+
+- hosts: all
+  name: "Test Role Deployments"
+  roles:
+  - firewall
+  - server-common 

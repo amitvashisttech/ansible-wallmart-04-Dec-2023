@@ -1,0 +1,9 @@
+---
+
+- name: Install the following PKG.
+  apt: name={{item }} state=present
+  with_items:
+    - tree
+    - apache2 
+    - ntp
+

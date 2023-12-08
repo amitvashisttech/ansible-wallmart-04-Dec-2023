@@ -1,0 +1,5 @@
+--- 
+
+- name: Create Sample Dirs
+  file: path=/tmp/mydir_{{ item }} state=touch 
+  with_sequence: start=1 end=5 
